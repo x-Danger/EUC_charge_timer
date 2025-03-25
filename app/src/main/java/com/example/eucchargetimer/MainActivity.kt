@@ -6,8 +6,14 @@ import android.text.Editable
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
+import android.widget.Toast
+import android.widget.TextView
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(),OnSeekBarChangeListener {
+    var seekBarNormal: SeekBar? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -15,6 +21,28 @@ class MainActivity : AppCompatActivity() {
         val vmax = 84
         //var accum_value = findViewById(R.id.value_actual) as EditText
         //var x = accum_value.text.toString().toInt()
+
+        seekBarNormal= findViewById(R.id.seekBar)
+
+        seekBarNormal?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int,
+                                           fromUser: Boolean) {
+                Toast.makeText(applicationContext, "seekbar progress: $progress", Toast.LENGTH_SHORT).show()
+                var percent_now = findViewById(R.id.percent) as EditText
+
+                var z = progress.toInt()
+                percent_now.setText("$z")
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+                Toast.makeText(applicationContext, "seekbar touch started!", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+                Toast.makeText(applicationContext, "seekbar touch stopped!", Toast.LENGTH_SHORT).show()
+            }
+        })
+
 
         var x2 = false
         var time_of_sharge1 = findViewById(R.id.time_of_sharge) as EditText
@@ -82,5 +110,17 @@ class MainActivity : AppCompatActivity() {
         timer.setOnClickListener {
             calculate()
         }
+
+    }override fun onProgressChanged(seekBar: SeekBar, persent: Int,
+                                    fromUser: Boolean) {
+        // called when progress is changed
+    }
+
+    override fun onStartTrackingTouch(seekBar: SeekBar) {
+        // called when tracking the seekbar is started
+    }
+
+    override fun onStopTrackingTouch(seekBar: SeekBar) {
+        // called when tracking the seekbar is stopped
     }
 }
