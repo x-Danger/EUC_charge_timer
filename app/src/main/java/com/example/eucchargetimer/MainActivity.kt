@@ -3,7 +3,7 @@ package com.example.eucchargetimer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.EditText
 import android.widget.Switch
 import android.widget.SeekBar
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(),OnSeekBarChangeListener {
         seekBarNormal?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int,
                                            fromUser: Boolean) {
-                Toast.makeText(applicationContext, "seekbar progress: $progress", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, "seekbar progress: $progress", Toast.LENGTH_SHORT).show()
                 var percent_now = findViewById(R.id.percent) as EditText
 
                 var z = progress.toInt()
@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity(),OnSeekBarChangeListener {
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
-                Toast.makeText(applicationContext, "seekbar touch started!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, "seekbar touch started!", Toast.LENGTH_SHORT).show()
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar) {
-                Toast.makeText(applicationContext, "seekbar touch stopped!", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(applicationContext, "seekbar touch stopped!", Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(),OnSeekBarChangeListener {
         //var multiplier = findViewById(R.id.switch1) as Switch
 
 
-        var timer = findViewById(R.id.button) as Button
+        var timer = findViewById(R.id.button) as ImageButton
 
 
 
