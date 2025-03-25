@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(),OnSeekBarChangeListener {
         //var x = accum_value.text.toString().toInt()
 
         seekBarNormal= findViewById(R.id.seekBar)
-
         seekBarNormal?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int,
                                            fromUser: Boolean) {
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity(),OnSeekBarChangeListener {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 //Toast.makeText(applicationContext, "seekbar touch stopped!", Toast.LENGTH_SHORT).show()
             }
+
         })
 
 
@@ -80,13 +80,23 @@ class MainActivity : AppCompatActivity(),OnSeekBarChangeListener {
             var time1 = time.toString()
 
             var hours_set1 = findViewById(R.id.hours_set) as EditText
-            var hours_set = hours_set1.text
             var minutes_set1 = findViewById(R.id.minutes_set) as EditText
-            var minutes_set = minutes_set1.text
+
             time_of_sharge1.setText(time1)
             var start_h = findViewById(R.id.time_of_trip_h) as EditText
+            var check_h = start_h.text.toString().toInt()
+            while (check_h > 23) {
+               check_h = check_h - 24
+           }
+            start_h.setText(check_h.toString())
             var start_m = findViewById(R.id.time_of_trip_m) as EditText
-            var start_m_int = start_m.text.toString().toInt()
+            var check_m = start_m.text.toString().toInt()
+            while (check_m > 59) {
+                check_m = check_m - 60
+            }
+            start_m.setText(check_m.toString())
+
+            var start_m_int = check_m
             // считаем время включения в сеть
             var minutes_of_plugin = start_m_int - minutes
             var hours_of_plugin = start_h.text.toString().toInt() - hours
@@ -111,7 +121,9 @@ class MainActivity : AppCompatActivity(),OnSeekBarChangeListener {
             calculate()
         }
 
-    }override fun onProgressChanged(seekBar: SeekBar, persent: Int,
+
+    }
+    override fun onProgressChanged(seekBar: SeekBar, persent: Int,
                                     fromUser: Boolean) {
         // called when progress is changed
     }
